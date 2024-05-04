@@ -1,1 +1,6 @@
-carnagecode
+.carnagecode/
+__pycache__/
+instance/
+.DS_Store
+.vscode/
+
