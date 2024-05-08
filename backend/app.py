@@ -1,8 +1,20 @@
 from flask import Flask, request, jsonify
 from joblib import load
 from flask_sqlalchemy import SQLAlchemy
+import requests
+from dotenv import load_dotenv
+import os
+from flask_cors import CORS
+
+load_dotenv()
 
 app = Flask(__name__)
+CORS(app)  # This will enable CORS for all routes and origins
+
+# For more controlled access, specify the origin:
+# CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://asuran:530041@localhost/carnage_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -18,12 +30,13 @@ with app.app_context():
     db.create_all()
 
 # Load models and vectorizers
-naive_bayes_count_model = load('backend/naive_bayes_count_model.joblib')
-naive_bayes_tfidf_model = load('backend/naive_bayes_tfidf_model.joblib')
-logistic_count_model = load('backend/logistic_count_model.joblib')
-logistic_tfidf_model = load('backend/logistic_tfidf_model.joblib')
-count_vectorizer = load('backend/count_vectorizer.joblib')
-tfidf_vectorizer = load('backend/tfidf_vectorizer.joblib')
+naive_bayes_count_model = load('naive_bayes_count_model.joblib')
+naive_bayes_tfidf_model = load('naive_bayes_tfidf_model.joblib')
+logistic_count_model = load('logistic_count_model.joblib')
+logistic_tfidf_model = load('logistic_tfidf_model.joblib')
+count_vectorizer = load('count_vectorizer.joblib')
+tfidf_vectorizer = load('tfidf_vectorizer.joblib')
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -76,6 +89,38 @@ def predict():
         "sentiment": sentiment
     })
 
+@app.route('/api/blogs', methods=['GET'])
+def get_blogs():
+    url = "https://api.hashnode.com/graphql"
+
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {os.getenv("HASHNODE_API_TOKEN")}'
+    }
+    query = """
+    {
+        user(username: "girishkumaradari") {
+            publication {
+                posts {
+                    title
+                    brief
+                    slug
+                    coverImage
+                    dateAdded
+                }
+            }
+        }
+    }
+    """
+    response = requests.post(url, json={'query': query}, headers=headers)
+    print("Using API Token:", os.getenv("HASHNODE_API_TOKEN"))
+
+    if response.ok:
+        return jsonify(response.json()['data']['user']['publication']['posts'])
+    else:
+        print("Status Code:", response.status_code)
+        print("Response Body:", response.text)  # This will show you the error from Hashnode if any
+        return jsonify({'error': 'Failed to fetch data'}), response.status_code
 
 @app.route('/')
 def home():
