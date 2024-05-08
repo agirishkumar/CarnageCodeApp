@@ -4,31 +4,31 @@ const projects = [
     {
       title: "AI-Driven Video Game Character Forge: A Multimodal Approach with Generative AI",
       description: "Automated the generation of 32,000 unique, theme-based game characters, leveraging Stable Diffusion, DreamBooth, and LoRA. Streamlined character design workflows, significantly reducing manual design iterations and enhancing game development.",
-      github: "#",
+      github: "https://github.com/agirishkumar/Ai-character-generation",
       webapp: "#"
     },
     {
       title: "NLP-driven music generation system",
       description: "Engineered a novel NLP-driven music generation system that transforms song lyrics into musical compositions, using sentiment analysis, keyword extraction, and topic modeling.",
-      github: "#",
+      github: "https://github.com/agirishkumar/NLP-Project-lyrics-to-music",
       webapp: "#"
     },
     {
       title: "Human-Centric RL Based Equity Portfolio Allocation Tool",
       description: "Spearheaded the development of a reinforcement learning-based system for equity portfolio management using historical data from Dow 30 companies. Integrated Deep Q-Networks (DQN) and Deep Deterministic Policy Gradient (DDPG) to dynamically adapt to market changes with a focus on risk mitigation.",
-      github: "#",
+      github: "https://github.com/agirishkumar/HCIproject",
       webapp: "#"
     },
     {
       title: "AI-Driven Workout Assistant",
       description: "Developed a pose estimation framework to analyze and ensure correct exercise performance. Employed machine learning algorithms including Decision Trees, KNN, LSTM, and Bi-LSTM to assess exercise form accuracy in real-time.",
-      github: "#",
+      github: "https://github.com/agirishkumar/prcv_prj",
       webapp: "#"
     },
     {
       title: "Chatbot to Analyze PDF Documents",
       description: "Developed a chatbot utilizing Flask, LangChain, and LLM (GPT-3.5-Turbo), capable of assimilating content from PDF files and responding to inquiries related to the document.",
-      github: "#",
+      github: "https://github.com/agirishkumar/ChatBot_LLM_PDF",
       webapp: "#"
     },
     {
@@ -40,13 +40,13 @@ const projects = [
     {
       title: "AI controlled agents playing Tetris game",
       description: "Created Tetris-playing agents utilizing Greedy search, NEAT, and Deep Q-learning algorithms. The NEAT agent outperformed other agents, attaining the highest score.",
-      github: "#",
+      github: "https://github.com/agirishkumar/Tetris",
       webapp: "#"
     },
     {
       title: "Image Manipulation Tool",
       description: "Developed a user-friendly Java image manipulation application, allowing users to load, save, and modify images adhering to the Model-View-Controller (MVC) architecture.",
-      github: "#",
+      github: "https://github.com/agirishkumar/PDP_NEU",
       webapp: "#"
     }
   ];
